@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Тест</h1>
+        <p>Тест</p>
+    </div>
+
+    <script>
+        // Инициализируем Telegram Web App
+        Telegram.WebApp.ready();
+
+        // Получаем URL-строку параметров
+        const urlParams = new URLSearchParams(window.location.search);
+        const link = urlParams.get("link"); // Считываем параметр "link"
+
+        if (link) {
+            // Настраиваем кнопку Telegram с переданной ссылкой
+            Telegram.WebApp.MainButton.text = "Перейти на сайт";
+            Telegram.WebApp.MainButton.color = "#007bff";
+            Telegram.WebApp.MainButton.textColor = "#ffffff";
+            Telegram.WebApp.MainButton.show();
+
+            // При клике открываем переданную ссылку
+            Telegram.WebApp.MainButton.onClick(() => {
+                window.open(link, "_blank");
+            });
+        } else {
+            document.body.innerHTML = "<h1>Ссылка не передана</h1>";
+        }
+    </script>
+</body>
+</html>
