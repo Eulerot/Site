@@ -24,34 +24,21 @@
             padding: 20px;
             display: inline-block;
         }
-        h1 {
-            font-size: 24px;
-        }
     </style>
 </head>
 <body>
-    <div class="content">
-    </div>
+    <div class="content"></div>
 
     <script>
         // Инициализируем Telegram Web App
         Telegram.WebApp.ready();
 
-        // Функция для работы с Local Storage
-        const saveLink = (link) => localStorage.setItem("savedLink", link);
-        const getSavedLink = () => localStorage.getItem("savedLink");
-
         // Получаем URL-строку параметров
         const urlParams = new URLSearchParams(window.location.search);
         const newLink = urlParams.get("link");
-        const contentDiv = document.querySelector('.content');
 
-        // Проверяем наличие новой ссылки
         if (newLink) {
-            // Сохраняем новую ссылку
-            saveLink(newLink);
-
-            // Обновляем интерфейс
+            // Обновляем интерфейс для новой ссылки
             Telegram.WebApp.MainButton.text = "Установить";
             Telegram.WebApp.MainButton.color = "#007bff";
             Telegram.WebApp.MainButton.textColor = "#ffffff";
@@ -61,23 +48,6 @@
             Telegram.WebApp.MainButton.onClick(() => {
                 window.open(newLink, "_blank");
             });
-
-                    } else {
-            // Если новой ссылки нет, проверяем сохранённую
-            const savedLink = getSavedLink();
-
-            if (savedLink) {
-                // Отображаем сохранённую ссылку
-                Telegram.WebApp.MainButton.text = "Установить";
-                Telegram.WebApp.MainButton.color = "#007bff";
-                Telegram.WebApp.MainButton.textColor = "#ffffff";
-                Telegram.WebApp.MainButton.show();
-
-                Telegram.WebApp.MainButton.onClick(() => {
-                    window.open(savedLink, "_blank");
-                });
-
-                            } 
         }
     </script>
 </body>
